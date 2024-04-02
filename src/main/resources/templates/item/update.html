@@ -13,7 +13,6 @@
     <div id="app">
         <h1>상품 수정</h1>
         <form th:action="@{/updateItem/{id}(id=${item.id})}" th:method="PUT">
-            <input type="hidden" name="id" th:value="${item.id}">
             <input name="title" th:value="${item.title}">
             <input name="price" th:value="${item.price}">
             <input name="description" th:value="${item.description}">
