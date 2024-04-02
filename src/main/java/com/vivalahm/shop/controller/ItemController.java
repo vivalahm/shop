@@ -2,6 +2,7 @@ package com.vivalahm.shop.controller;
 
 import com.vivalahm.shop.service.ItemService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,9 +47,9 @@ public class ItemController {
     }
 
     @DeleteMapping("/deleteItem/{id}")
-    public String deleteItem(@PathVariable Long id){
+    public ResponseEntity<String> deleteItem(@PathVariable Long id){
         itemService.deleteItem(id);
-        return "redirect:/list";
+        return ResponseEntity.status(200).body("success");
     }
 
 

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>list</title>
     <link rel="stylesheet" href="/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         section {
             border: 1px solid #000;
@@ -34,15 +35,45 @@
             <h2 style="text-align: center;"><a th:href="@{/Item/{id}(id=${item.id})}" th:text="${item.title}"></a></h2>
             <p style="text-align: center;" th:text="${item.price+'원'}"></p>
             <div class="button-container">
-                <button th:onclick="'window.location.href=\'' + @{/update/{id}(id=${item.id})} + '\''">수정</button>
-                <form th:action="@{/deleteItem/{id}(id=${item.id})}" method="post">
-                    <input type="hidden" name="_method" value="delete" />
-                    <button type="submit">삭제</button>
-                </form>
+                <button class="editItem" th:data-id="${item.id}">수정</button>
+                <button class="deleteItem" th:data-id="${item.id}">삭제</button>
             </div>
         </section>
     </div>
     <button class="button-container" onclick="location.href='/write'">상품 등록</button>
 </div>
+
+<script>
+
+    $('.editItem').click(function () {
+        var id = $(this).data('id');
+        console.log(id);
+        editItem(id);
+    });
+
+    function editItem(id) {
+        location.href = '/update/' + id;
+    }
+
+
+    $('.deleteItem').click(function () {
+        var id = $(this).data('id');
+        console.log(id);
+        deleteItem(id);
+    });
+    function deleteItem(id) {
+        $.ajax({
+            type: 'POST',
+            url: '/deleteItem/' + id,
+            data: {_method: 'delete'},
+            success: function (response) {
+                alert('삭제 완료');
+                // Find the section containing the item and remove it from the DOM
+                $('section').find('[data-id="' + id + '"]').parent().parent().remove();
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
