@@ -8,59 +8,46 @@
     <title>list</title>
     <link rel="stylesheet" href="/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        section {
-            border: 1px solid #000;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-        }
-        .button-container button {
-            margin-left: 10px;
-        }
-        .button-container button:active {
-            transform: scale(0.95);
-        }
-    </style>
 </head>
 <body>
 <div th:replace="item/nav :: navbar"></div>
 <div id="app">
     <h1>상품</h1>
     <div th:each="item : ${items}">
-        <section>
-            <h2 style="text-align: center;"><a th:href="@{/Item/{id}(id=${item.id})}" th:text="${item.title}"></a></h2>
-            <p style="text-align: center;" th:text="${item.price+'원'}"></p>
+        <section class="item-section">
+            <a th:href="@{/Item/{id}(id=${item.id})}" class="item-link">
+                <h2 style="text-align: center;" th:text="${item.title}"></h2>
+                <p style="text-align: center;" th:text="${item.price+'원'}"></p>
+            </a>
             <div class="button-container">
                 <button class="editItem" th:data-id="${item.id}">수정</button>
                 <button class="deleteItem" th:data-id="${item.id}">삭제</button>
             </div>
         </section>
     </div>
-    <button class="button-container" onclick="location.href='/write'">상품 등록</button>
+    <div class="register-button-container">
+        <button onclick="location.href='/write'">상품 등록</button>
+    </div>
 </div>
 
 <script>
+    $('.editItem, .deleteItem').click(function (event) {
+        event.stopPropagation(); // Stop the event from bubbling up to parent elements
 
-    $('.editItem').click(function () {
         var id = $(this).data('id');
         console.log(id);
-        editItem(id);
+
+        if ($(this).hasClass('editItem')) {
+            editItem(id);
+        } else if ($(this).hasClass('deleteItem')) {
+            deleteItem(id);
+        }
     });
 
     function editItem(id) {
         location.href = '/update/' + id;
     }
 
-
-    $('.deleteItem').click(function () {
-        var id = $(this).data('id');
-        console.log(id);
-        deleteItem(id);
-    });
     function deleteItem(id) {
         $.ajax({
             type: 'POST',
@@ -70,6 +57,9 @@
                 alert('삭제 완료');
                 // Find the section containing the item and remove it from the DOM
                 $('section').find('[data-id="' + id + '"]').parent().parent().remove();
+            },
+            fail: function (error) {
+                alert('삭제 실패');
             }
         });
     }

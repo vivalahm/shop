@@ -1,0 +1,36 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* align items to the top */
+    align-items: center;
+    height: 90vh;
+    width: 70%;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: auto;
+}
+
+input {
+    width: 80%; /* set the input width to 80% of the form width */
+    height: 40px; /* set the input height */
+    padding: 5px; /* add some padding */
+    font-size: 16px; /* increase the font size */
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
