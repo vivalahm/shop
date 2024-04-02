@@ -17,7 +17,7 @@
         <section class="item-section">
             <a th:href="@{/Item/{id}(id=${item.id})}" class="item-link">
                 <h2 style="text-align: center;" th:text="${item.title}"></h2>
-                <p style="text-align: center;" th:text="${item.price+'원'}"></p>
+                <p style="text-align: center;" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')+'원'}"></p>
             </a>
             <div class="button-container">
                 <button class="editItem" th:data-id="${item.id}">수정</button>
