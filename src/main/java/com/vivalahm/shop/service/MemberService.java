@@ -46,7 +46,7 @@ public class MemberService {
         Member member = new Member();
         member.setUserName(userName);
         var EncryptedPassword = passwordEncoder.encode(password);
-        member.setPasword(EncryptedPassword);
+        member.setPassword(EncryptedPassword);
         member.setDisplayName(displayName);
         memberRepository.save(member);
     }

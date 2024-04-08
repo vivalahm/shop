@@ -21,4 +21,9 @@ public class MemberController {
         memberService.join(userName, password, displayName);
         return "redirect:/index";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "member/login";
+    }
 }

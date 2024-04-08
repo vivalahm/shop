@@ -17,10 +17,8 @@ public class Member {
     private String userName;
 
     @Column(name = "member_password" , nullable = false)
-    private String pasword;
+    private String password;
 
     @Column(name = "member_display_name" , nullable = false)
     private String displayName;
-
-
 }

@@ -22,9 +22,23 @@ public class SecurityConfig {
         http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((authorizeRequests) ->
                 authorizeRequests
-                    .requestMatchers("/**").permitAll()
+                    .requestMatchers("/login").permitAll()
+                    .requestMatchers("/register").permitAll()
+                        //permit css, js, img
+                    .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                     .anyRequest().authenticated()
             );
+        http.formLogin((formLogin) ->
+                formLogin
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/list", true)
+                        .failureUrl("/login?error")
+        );
+        http.logout((logout) ->
+            logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+        );
         return http.build();
     }
 }

@@ -6,13 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>로그인페이지</title>
-    <link rel="stylesheet" href="/main.css">
-    <link rel="stylesheet" href="/form.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/form.css">
 </head>
 <body>
 <h1>로그인</h1>
+<div th:if="${param.error}">
+    <p>아이디 또는 비밀번호가 올바르지 않습니다.</p>
+</div>
+
+<div th:if="${session.userName}">
+    <p th:text="'안녕하세요. ' + ${session.userName} + '님'"></p>
+    <button type="button" onclick="location.href='/logout'">로그아웃</button>
+</div>
 <form action="/login" method="post">
-    <input type="text" name="userName" placeholder="아이디">
+    <input type="text" name="username" placeholder="아이디">
     <input type="password" name="password" placeholder="비밀번호">
     <button type="submit">로그인</button>
     <button type="button" onclick="location.href='/register'">회원가입</button>
