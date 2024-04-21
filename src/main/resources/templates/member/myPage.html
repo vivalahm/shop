@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <style>
+        .user-info {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 0 auto; /* Add this to center the div */
+            width: 50%; /* You can adjust this value to your needs */
+            text-align: center; /* Align the text to the center */
+        }
+        .user-info p {
+            font-size: 18px;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="item/nav :: navbar"></div>
+<h1>마이페이지</h1>
+
+<div sec:authorize="isAuthenticated()" class="user-info">
+    <p><strong>이름:</strong> <span sec:authentication="principal.displayName"></span></p> <!-- Display the authenticated user's display name -->
+    <p><strong>아이디:</strong> <span sec:authentication="principal.Username"></span></p> <!-- Display the authenticated user's username -->
+    <p><strong>등급:</strong> <span sec:authorize="hasAuthority('ROLE_ADMIN')">관리자</span><span sec:authorize="!hasAuthority('ROLE_ADMIN')">일반 사용자</span></p>
+</div>
+
+</body>
+</html>

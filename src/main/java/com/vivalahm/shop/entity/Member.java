@@ -21,4 +21,7 @@ public class Member {
 
     @Column(name = "member_display_name" , nullable = false)
     private String displayName;
+
+    @Column(name = "is_administrator", nullable = true)
+    private Character isAdministrator = 'N';
 }

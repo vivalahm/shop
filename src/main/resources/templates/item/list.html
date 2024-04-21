@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -19,13 +19,13 @@
                 <h2 style="text-align: center;" th:text="${item.title}"></h2>
                 <p style="text-align: center;" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')+'원'}"></p>
             </a>
-            <div class="button-container">
+            <div class="button-container" sec:authorize="hasRole('ROLE_ADMIN')">
                 <button class="editItem" th:data-id="${item.id}">수정</button>
                 <button class="deleteItem" th:data-id="${item.id}">삭제</button>
             </div>
         </section>
     </div>
-    <div class="register-button-container">
+    <div class="register-button-container" sec:authorize="hasRole('ROLE_ADMIN')">
         <button onclick="location.href='/write'">상품 등록</button>
     </div>
 </div>
