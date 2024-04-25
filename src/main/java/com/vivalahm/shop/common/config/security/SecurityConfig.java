@@ -2,6 +2,7 @@ package com.vivalahm.shop.common.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Bean
@@ -22,7 +24,7 @@ public class SecurityConfig {
         http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((authorizeRequests) ->
                 authorizeRequests
-                        .requestMatchers("/login", "/register", "/signUp").permitAll()
+                        .requestMatchers("/login", "/register", "/signUp","error/403").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                         .anyRequest().authenticated()
         );
@@ -36,6 +38,10 @@ public class SecurityConfig {
                 logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
+        );
+        http.exceptionHandling((exceptionHandling) ->
+                exceptionHandling
+                        .accessDeniedPage("/error/403")
         );
         return http.build();
     }

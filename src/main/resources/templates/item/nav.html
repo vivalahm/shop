@@ -1,7 +1,9 @@
 <div class="nav" th:fragment="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
     <a class="logo">HM Mall</a>
     <a href="/list">List</a>
-    <a href="/write">Write</a>
+    <th:blcok sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/write">Write</a>
+    </th:blcok>
     <a href="/my-page">
         <span sec:authentication="principal.displayName"></span>님의 마이페이지
     </a>
