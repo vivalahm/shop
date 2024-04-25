@@ -34,5 +34,10 @@
     <p><strong>등급:</strong> <span sec:authorize="hasAuthority('ROLE_ADMIN')">관리자</span><span sec:authorize="!hasAuthority('ROLE_ADMIN')">일반 사용자</span></p>
 </div>
 
+<div sec:authorize="isAnonymous()">
+    <p>로그인이 필요한 서비스입니다.</p>
+    <button onclick="location.href='/login'">로그인</button>
+</div>
+
 </body>
 </html>

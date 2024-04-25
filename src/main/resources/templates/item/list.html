@@ -18,11 +18,12 @@
             <a th:href="@{/Item/{id}(id=${item.id})}" class="item-link">
                 <h2 style="text-align: center;" th:text="${item.title}"></h2>
                 <p style="text-align: center;" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')+'원'}"></p>
+                <div class="button-container" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <button class="editItem" th:data-id="${item.id}">수정</button>
+                    <button class="deleteItem" th:data-id="${item.id}">삭제</button>
+                </div>
             </a>
-            <div class="button-container" sec:authorize="hasRole('ROLE_ADMIN')">
-                <button class="editItem" th:data-id="${item.id}">수정</button>
-                <button class="deleteItem" th:data-id="${item.id}">삭제</button>
-            </div>
+
         </section>
     </div>
     <div class="register-button-container" sec:authorize="hasRole('ROLE_ADMIN')">
@@ -32,6 +33,7 @@
 
 <script>
     $('.editItem, .deleteItem').click(function (event) {
+        event.preventDefault(); // Prevent the default action
         event.stopPropagation(); // Stop the event from bubbling up to parent elements
 
         var id = $(this).data('id');
@@ -49,19 +51,21 @@
     }
 
     function deleteItem(id) {
-        $.ajax({
-            type: 'POST',
-            url: '/deleteItem/' + id,
-            data: {_method: 'delete'},
-            success: function (response) {
-                alert('삭제 완료');
-                // Find the section containing the item and remove it from the DOM
-                $('section').find('[data-id="' + id + '"]').parent().parent().remove();
-            },
-            fail: function (error) {
-                alert('삭제 실패');
-            }
-        });
+        var confirmDelete = confirm('정말로 삭제하시겠습니까?');
+        if (confirmDelete) {
+            $.ajax({
+                type: 'POST',
+                url: '/deleteItem/' + id,
+                data: {_method: 'delete'},
+                success: function (response) {
+                    alert('삭제 완료');
+                    $('div').find('[data-id="' + id + '"]').parent().parent().parent().remove();
+                },
+                fail: function (error) {
+                    alert('삭제 실패');
+                }
+            });
+        }
     }
 </script>
 

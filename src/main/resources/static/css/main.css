@@ -1,71 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+
+body, h1, .nav a, .nav .logo, input, button {
+    font-family: 'Montserrat';
+}
+
 .nav {
     display: flex;
     padding: 10px;
     align-items: center;
-    font-family : 'Montserrat';
+    height: 40px;
+    background-color: lightsteelblue;
 }
-.nav a {
-    margin-right: 10px;
-    text-decoration : none;
-    font-weight : 400;
-    letter-spacing : -0.5px;
+
+.nav a, .nav .logo {
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
 .nav .logo {
     font-weight : 800;
+    background-color: orangered;
+    color: black;
 }
 
 input, button {
-    padding : 8px 13px;
+    padding : 10px 20px;
     margin-top : 5px;
     border : 1px solid grey;
     border-radius : 4px;
     vertical-align : middle;
+    color: black;
+    transition: background-color 0.3s ease;
 }
-button {
-    background : black;
-    color : white;
-    border : none;
-}
-input {
-    display : block;
+
+button:hover, .nav a:hover {
+    background-color: #45a049;
 }
 
 .detail {
     text-align : center;
 }
+
 .detail img{
     max-width : 30%;
     display : block;
     margin : auto;
 }
 
- body {
-     font-family: 'Arial', sans-serif;
-     margin: 0;
-     padding: 0;
-     background-color: #f9f9f9;
- }
-
 h1 {
     text-align: center;
     color: #333;
-    font-family: 'Helvetica Neue', sans-serif;
 }
 
 section {
     border: 1px solid #000;
-    margin: 10px auto; /* top and bottom margin is 10px, left and right margin is auto */
+    margin: 10px auto;
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 50%; /* reduce the width to 50% of the parent element */
-    max-width: 800px; /* set a max-width to ensure the section doesn't get too wide on large screens */
+    width: 50%;
+    max-width: 800px;
 }
 
 .button-container {
     display: flex;
-    justify-content: flex-end;
+    width: auto;
 }
 
 .button-container button {
@@ -104,12 +110,11 @@ section {
 .item-link {
     text-decoration: none;
     color: inherit;
-    display: inline-block; /* make the link inline-block to limit its width */
-    width: 100%; /* set the width to 100% of its parent */
+    display: inline-block;
+    width: 100%;
 }
 
 .item-section {
-    /* ... existing styles ... */
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
