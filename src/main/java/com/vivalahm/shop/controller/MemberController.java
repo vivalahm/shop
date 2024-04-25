@@ -18,9 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
     private final MemberService memberService;
 
+
     @GetMapping("/register")
-    public String register() {
-        return "member/signUp";
+    public String register(Authentication auth){
+        if(auth.isAuthenticated()){
+            return "redirect:/list";
+        }else{
+            return "member/register";
+        }
     }
 
     @PostMapping("/signUp")

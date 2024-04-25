@@ -1,4 +1,5 @@
 form {
+    margin-top: 50px; /* Add a top margin to the form */
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* align items to the top */

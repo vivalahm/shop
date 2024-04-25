@@ -20,7 +20,6 @@ body, h1, .nav a, .nav .logo, input, button {
     display: inline-block;
     font-size: 16px;
     margin: 0 10px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
@@ -30,13 +29,23 @@ body, h1, .nav a, .nav .logo, input, button {
     color: black;
 }
 
-input, button {
+input {
     padding : 10px 20px;
     margin-top : 5px;
     border : 1px solid grey;
     border-radius : 4px;
     vertical-align : middle;
     color: black;
+    transition: background-color 0.3s ease;
+}
+button {
+    padding : 10px 20px;
+    margin-top : 5px;
+    border : 1px solid grey;
+    border-radius : 4px;
+    vertical-align : middle;
+    color: black;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
@@ -81,7 +90,6 @@ section {
     color: #fff;
     border: none;
     border-radius: 3px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
