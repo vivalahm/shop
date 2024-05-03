@@ -30,7 +30,6 @@ public class MemberController {
     @PostMapping("/signUp")
     public ResponseEntity<String> join(String userName, String password, String displayName) {
         try {
-            System.out.println("여기 타나?");
             ResponseEntity<String> responseEntity = null;
             responseEntity= memberService.join(userName, password, displayName);
             return responseEntity;

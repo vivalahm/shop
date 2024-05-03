@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    List<Item> findAllByOrderByIdAsc();
+    List<Item> findAllByOrderByUpdatedAtDesc();
 }

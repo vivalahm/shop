@@ -5,8 +5,6 @@ import com.vivalahm.shop.entity.ShopUserDetails;
 import com.vivalahm.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -25,9 +23,9 @@ public class MyUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("username is invalid");
         }
         if(member.getIsAdministrator().equals('Y')){
-            return new ShopUserDetails(member.getUserName(), member.getPassword(), member.getDisplayName(), Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN")));
+            return new ShopUserDetails(member.getId(), member.getUserName(), member.getPassword(), member.getDisplayName(), Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN")));
         }
-        return new ShopUserDetails(member.getUserName(), member.getPassword(),member.getDisplayName(), Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
+        return new ShopUserDetails(member.getId(), member.getUserName(), member.getPassword(),member.getDisplayName(), Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
     }
 
 }

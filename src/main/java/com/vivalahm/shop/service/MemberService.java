@@ -23,7 +23,6 @@ public class MemberService {
 
 
     public ResponseEntity<String> join(String userName, String password, String displayName) {
-        ResponseEntity<String> responseEntity = null;
         Pattern userNamePattern = Pattern.compile("^[a-zA-Z0-9]{3,15}$");
         Matcher userNameMatcher = userNamePattern.matcher(userName);
         if (!userNameMatcher.matches()) {

@@ -1,9 +1,11 @@
 package com.vivalahm.shop.controller;
 
+import com.vivalahm.shop.entity.ShopUserDetails;
 import com.vivalahm.shop.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class ItemController {
     @GetMapping("/Item/{id}")
     public String detail(Model model, @PathVariable Long id){
         model.addAttribute("item", itemService.getItem(id));
+        model.addAttribute("member", itemService.getItem(id).getMember());
         return "item/detail";
     }
 
@@ -31,8 +34,15 @@ public class ItemController {
     }
 
     @PostMapping("/addItem")
-    public String addItem(String title, Long price, String description){
-        itemService.addItem(title, price, description);
+    public String addItem(String title, Long price, String description, Authentication auth){
+        if(auth == null || !auth.isAuthenticated()){
+            throw new IllegalArgumentException("auth is invalid");
+        }
+
+        ShopUserDetails userDetails = (ShopUserDetails) auth.getPrincipal();
+        Long memberId = userDetails.getId();
+
+        itemService.addItem(title, price, description, memberId);
         return "redirect:/list";
     }
 

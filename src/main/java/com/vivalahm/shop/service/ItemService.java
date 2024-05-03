@@ -1,7 +1,9 @@
 package com.vivalahm.shop.service;
 
 import com.vivalahm.shop.entity.Item;
+import com.vivalahm.shop.entity.Member;
 import com.vivalahm.shop.repository.ItemRepository;
+import com.vivalahm.shop.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
+    private final MemberRepository memberRepository;
 
     public List<Item> getItems(){
-        return itemRepository.findAllByOrderByIdAsc();
+        return itemRepository.findAllByOrderByUpdatedAtDesc();
     }
 
-    public void addItem(String title, Long price, String description){
+    public void addItem(String title, Long price, String description, Long memberId){
         Item item = new Item();
         if(title == null || title.length()>255){
             throw new IllegalArgumentException("title is invalid");
@@ -30,6 +33,10 @@ public class ItemService {
             throw new IllegalArgumentException("description is invalid");
         }
         item.setDescription(description);
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member id is invalid"));
+        item.setMember(member);
         itemRepository.save(item);
     }
 
