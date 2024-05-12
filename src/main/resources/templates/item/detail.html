@@ -6,26 +6,69 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Item Detail</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/detail.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/css/styles.min.css?h=e289d983b861082bf111d3a4155d8a03">
 </head>
-<body>
-<div th:replace="item/nav :: navbar"></div>
-<div class="detail">
-    <div class="item-image">
-        <img src="https://placehold.co/500" alt="Item Image">
+<body id="page-top">
+<div id="wrapper">
+    <div th:replace="item/nav :: navbar"></div>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="item/nav_top :: nav_top"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Item Detail</h3>
+                <div class="row mb-3">
+                    <div class="col-lg-4">
+                        <div class="card mb-3">
+                            <div class="card-body text-center shadow">
+                                <img class="rounded-circle mb-3 mt-4" src="https://placehold.co/500" alt="Item Image">
+                                <div class="mb-3">
+                                    <button class="btn btn-primary btn-sm" type="button">Change Photo</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Your other content here -->
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <p class="text-primary m-0 fw-bold">Item Settings</p>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="title"><strong>Title</strong></label>
+                                        <input class="form-control" type="text" id="title" th:value="${item.title}" name="title">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="price"><strong>Price</strong></label>
+                                        <input class="form-control" type="text" id="price" th:value="${item.price}" name="price">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="description"><strong>Description</strong></label>
+                                        <textarea class="form-control" id="description" rows="4" th:text="${item.description}" name="description"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary btn-sm" type="submit">Save Settings</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Your other content here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Brand 2024</span></div>
+            </div>
+        </footer>
     </div>
-    <div class="item-info">
-        <h1 th:text="${item.title}">Item Title</h1>
-        <p class="item-price" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')+'원'}">Item Price</p>
-        <p class="item-description" th:text="${item.description}">Item Description</p>
-        <p class="item-updated" th:text="${#temporals.format(item.updatedAt, 'yyyy-MM-dd HH:mm:ss')}">Item Updated</p>
-    </div>
-
-    <div class="seller-info">
-        <h2>판매자 정보</h2>
-        <p class="seller-name" th:text="${member.userName}">Seller Name</p>
-    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/script.min.js?h=bdf36300aae20ed8ebca7e88738d5267"></script>
 </body>
 </html>

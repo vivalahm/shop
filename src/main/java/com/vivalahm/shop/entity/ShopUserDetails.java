@@ -1,10 +1,12 @@
 package com.vivalahm.shop.entity;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
+@Getter
 public class ShopUserDetails extends User {
     private String displayName;
     private Long id;
@@ -14,13 +16,5 @@ public class ShopUserDetails extends User {
         this.id = id;
         this.displayName = displayName;
 
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

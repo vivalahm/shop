@@ -1,24 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>상품 등록</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/form.css">
-
+    <link rel="stylesheet" href="/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/css/styles.min.css?h=e289d983b861082bf111d3a4155d8a03">
 </head>
-<body>
-<div th:replace="item/nav :: navbar"></div>
-<h1>상품 등록</h1>
-    <form action="/addItem" method="POST">
-        <input name = "title" placeholder="상품명">
-        <input name = "price" placeholder="가격">
-        <input name = "description" placeholder="상품 상세">
-        <button type="submit">전송</button>
-    </form>
-
+<body id="page-top">
+<div id="wrapper">
+    <div th:replace="item/nav :: navbar"></div>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="item/nav_top :: nav_top"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">상품 등록</h3>
+                <div class="row mb-3">
+                    <div class="col-lg-8">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3"><p class="text-primary m-0 fw-bold">상품 정보</p></div>
+                            <div class="card-body">
+                                <form action="/addItem" method="POST">
+                                    <div class="mb-3"><label class="form-label" for="title"><strong>상품명</strong></label><input class="form-control" type="text" id="title" name="title" placeholder="상품명"></div>
+                                    <div class="mb-3"><label class="form-label" for="price"><strong>가격</strong></label><input class="form-control" type="text" id="price" name="price" placeholder="가격"></div>
+                                    <div class="mb-3"><label class="form-label" for="description"><strong>상품 상세</strong></label><input class="form-control" type="text" id="description" name="description" placeholder="상품 상세"></div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary btn-sm" type="submit">전송</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Brand 2024</span></div>
+            </div>
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/script.min.js?h=bdf36300aae20ed8ebca7e88738d5267"></script>
 </body>
 </html>

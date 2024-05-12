@@ -1,37 +1,63 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>list</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="/css/styles.min.css?h=e289d983b861082bf111d3a4155d8a03">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
-<div th:replace="item/nav :: navbar"></div>
-<div id="app">
-    <h1>상품</h1>
-    <div th:each="item : ${items}">
-        <section class="item-section">
-            <a th:href="@{/Item/{id}(id=${item.id})}" class="item-link">
-                <h2 style="text-align: center;" th:text="${item.title}"></h2>
-                <p style="text-align: center;" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')+'원'}"></p>
-                <div class="button-container" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <button class="editItem" th:data-id="${item.id}">수정</button>
-                    <button class="deleteItem" th:data-id="${item.id}">삭제</button>
+<body id="page-top">
+<div id="wrapper">
+    <div th:replace="item/nav :: navbar"></div>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:replace="item/nav_top :: nav_top"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">상품</h3>
+                <div th:each="item : ${items}">
+                    <a th:href="@{/Item/{id}(id=${item.id})}" class="card shadow border-start-success py-2" style="text-decoration: none;">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase text-success fw-bold text-xs mb-1"><span th:text="${item.title}"></span></div>
+                                    <div class="text-dark fw-bold h5 mb-0"><span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')+'원'}"></span></div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="button-container" sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <button class="editItem" th:data-id="${item.id}">수정</button>
+                                        <button class="deleteItem" th:data-id="${item.id}">삭제</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-
-        </section>
+                <div class="register-button-container" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <button onclick="location.href='/write'">상품 등록</button>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Brand 2024</span></div>
+            </div>
+        </footer>
     </div>
-    <div class="register-button-container" sec:authorize="hasRole('ROLE_ADMIN')">
-        <button onclick="location.href='/write'">상품 등록</button>
-    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/script.min.js?h=bdf36300aae20ed8ebca7e88738d5267"></script>
 <script>
+    $(document).ready(function() {
+        var url = window.location.pathname;
+        if(url === '/list') {
+            $('#accordionSidebar > li:nth-child(1) > a').addClass('active');
+        }
+    });
+
     $('.editItem, .deleteItem').click(function (event) {
         event.preventDefault(); // Prevent the default action
         event.stopPropagation(); // Stop the event from bubbling up to parent elements
@@ -68,6 +94,5 @@
         }
     }
 </script>
-
 </body>
 </html>

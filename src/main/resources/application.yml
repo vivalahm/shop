@@ -18,3 +18,9 @@ spring:
     hiddenmethod:
       filter:
         enable: true
+server:
+  servlet:
+    session:
+      cookie:
+        max-age: 30m
+      timeout: 30m

@@ -1,11 +1,24 @@
-<div class="nav" th:fragment="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <a class="logo">HM Mall</a>
-    <a href="/list">List</a>
-    <th:blcok sec:authorize="hasRole('ROLE_ADMIN')">
-        <a href="/write">Write</a>
-    </th:blcok>
-    <a href="/my-page">
-        <span sec:authentication="principal.displayName"></span>님의 마이페이지
+<nav th:fragment="navbar" class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="container-fluid d-flex flex-column p-0"><a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+        <div class="sidebar-brand-icon rotate-n-15"><i class="far fa-hand-peace"></i></div>
+        <div class="sidebar-brand-text mx-3"><span style="color: rgb(254,124,95);">HM_mall</span></div>
     </a>
-    <button sec:authorize="isAuthenticated()" onclick="location.href='/logout'">Logout</button>
-</div>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item"><a class="nav-link" href="/list"><i class="fas fa-gem"></i><span>list</span></a>
+            </li>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <li class="nav-item"><a class="nav-link" href="/write"><i class="fas fa-edit">
+                </i><span>Write</span></a></li>
+            </th:block>
+            <li class="nav-item"><a class="nav-link" href="/my-page"><i
+                    class="fas fa-user"></i><span sec:authentication="principal.displayName">님의 마이페이지</span></a></li>
+            <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" href="/logout"><i class="far fa-user-circle"></i><span>Logout</span></a>
+            </li>
+        </ul>
+        <div class="text-center d-none d-md-inline">
+            <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+        </div>
+    </div>
+</nav>
